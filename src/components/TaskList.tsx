@@ -21,7 +21,8 @@ export function TaskList() {
       "isComplete": false,
     }
     if (task.title !== ""){
-      setTasks(tasks => [...tasks, task])
+      setTasks(tasks => [...tasks, task]) // add new task to the old state of tasks
+      setNewTaskTitle('') // reset input after added the task
   }
 // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
   }
