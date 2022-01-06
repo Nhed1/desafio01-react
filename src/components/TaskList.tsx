@@ -14,32 +14,36 @@ export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
-  useEffect(() => {
-    tasks.forEach(task => {
-      tasks.splice(tasks.indexOf(task), 1); 
-    })
-  },[handleRemoveTask])
-
   function handleCreateNewTask() {
     const task = {
       "id": Date.now(),
       "title": newTaskTitle,
       "isComplete": false,
     }
-
-    if (!(newTaskTitle === "")){
+    if (task.title !== ""){
       setTasks(tasks => [...tasks, task])
   }
-  return task
 // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
   }
 
   function handleToggleTaskCompletion(id: number) {
+    // tasks.forEach(task => {
+    //   if (task.id == id){
+    //     setTasks((tasks) => task.isComplete = !task.isComplete)
+    //   }
+    // })
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
   }
 
   function handleRemoveTask(id: number) {
-    return id
+    tasks.forEach(task => {
+      if (task.id == id){
+        setTasks((tasks) => {
+          tasks.splice(tasks.indexOf(task), 1)
+          return [...tasks]
+        })
+    }
+  })
     // Remova uma task da listagem pelo ID
   }
 
